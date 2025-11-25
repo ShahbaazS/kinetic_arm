@@ -10,10 +10,16 @@ LeftRight = "Left"; // [Left,Right]
 ArmLength = 282; //[141: 564]
 // Circumference of Forearm just below elbow crease (mm)
 ForearmCircumference = 271; //[135: 542]
-// Circumference of Bicep (mm)
+// Automatically calculate Bicep size based on Forearm size to maintain original proportions?
+LockBicepToForearmRatio = true;
+// Otherwise: Circumference of Bicep (mm)
 BicepCircumference = 294; //[147: 588]
 // Padding Thickness -inside forearm and cuff (mm)
 PaddingThickness = 2; //[0: 10]
+
+// --- 3D Printing Orientation ---
+// Rotate the part to lay flat on the bed (X, Y, Z in degrees)
+Print_Rotation = [0, 0, 0];
 
 /* [Hidden] */
 
@@ -33,12 +39,20 @@ ForearmCircumferenceWPadding = ((ForearmCircumference/PI) + 2*PaddingThickness) 
 ArmCircumferenceScale        = ForearmCircumferenceWPadding / BaseForearmCircumference;
 
 // Scale around the upper arm (for the upper arm pieces)
-BicepCircumferenceWPadding = ((BicepCircumference/PI) + 2*PaddingThickness) * PI;
+
+CalculatedBicep = LockBicepToForearmRatio 
+    ? ForearmCircumference * (BaseBicepCircumference / BaseForearmCircumference) 
+    : BicepCircumference;
+    
+BicepCircumferenceWPadding = ((CalculatedBicep/PI) + 2*PaddingThickness) * PI;
 CuffScale                  = BicepCircumferenceWPadding / BaseBicepCircumference;
 
 print_part();
 
 module print_part( ) {
+    
+    rotate(Print_Rotation) {
+        
     // --- Kinetic Forearm types ---
     if (part == "ForearmA") {
         if (LeftRight == "Left") {
@@ -104,7 +118,7 @@ module print_part( ) {
             UpperArmCoverKinetic();
         }
     }
-    
+    }
 }
 
 
@@ -157,5 +171,7 @@ module UpperArmCoverKinetic() {
         import("Kinetic Arm STL Files/Upper Components/Scalable Components/Upper Arm Cover/Upper Arm Cover 100%.STL",
                center=true, convexity=3);
 }
+
+
 
 
