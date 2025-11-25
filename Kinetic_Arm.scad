@@ -2,7 +2,7 @@
 // Above-elbow, 3D printable prosthetic arm
 
 // Preview Each Part
-part = "ForearmA"; // [ ForearmA:ForearmA, ForearmB:ForearmB, ForearmC:ForearmC, ForearmD:ForearmD,ForearmE:ForearmE, ForearmF:ForearmF, UpperArm:UpperArm, UpperArmCover:UpperArmCover]
+part = "ForearmA"; // [ ForearmA:ForearmA, ForearmB:ForearmB, ForearmC:ForearmC, ForearmD:ForearmD,ForearmE:ForearmE, ForearmF:ForearmF, UpperArm:UpperArm, UpperArmCover:UpperArmCover, TypeAClosedForearm:TypeAClosedForearm, TypeAForearmStraps:TypeAForearmStraps, Palm:Palm, UpperArmCuff:UpperArmCuff]
 
 // Choose Left or Right Hand
 LeftRight = "Left"; // [Left,Right]
@@ -87,6 +87,30 @@ module print_part( ) {
             ForearmF();
         }
     }
+    
+     if (part == "TypeAClosedForearm") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) TypeAClosedForearm();
+        } else {
+            TypeAClosedForearm();
+        }
+    }   
+   
+    if (part == "TypeAForearmStraps") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) TypeAForearmStraps();
+        } else {
+            TypeAForearmStraps();
+        }
+    }
+    
+    if (part == "Palm") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) Palm();
+        } else {
+            Palm();
+        }
+    }
 
     // --- Kinetic Upper Arm ---
     if (part == "UpperArm") {
@@ -105,6 +129,13 @@ module print_part( ) {
         }
     }
     
+    if (part == "UpperArmCuff") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) UpperArmCuff();
+        } else {
+            UpperArmCuff();
+        }
+    }
 }
 
 
@@ -145,6 +176,24 @@ module ForearmF() {
                center=true, convexity=3);
 }
 
+module TypeAClosedForearm() {
+    scale([ArmCircumferenceScale, ArmCircumferenceScale, ArmScale])
+        import("Type A Closed Forearm 100.STL",
+               center=true, convexity=3);
+}
+
+module TypeAForearmStraps() {
+    scale([ArmCircumferenceScale, ArmCircumferenceScale, ArmScale])
+        import("Type A Forearm 100_ 2 Straps v6.STL",
+               center=true, convexity=3);
+}
+
+module Palm() {
+    scale([ArmCircumferenceScale, ArmCircumferenceScale, ArmScale])
+        import("Kinetic Arm STL Files/Lower Components/Non-scalable Components/Palm/Palm RH100%.STL",
+               center=true, convexity=3);
+}
+
 // --- Kinetic Arm STL Files/Upper Components/Scalable Components/Upper Arm ---
 module UpperArmKinetic() {
     scale([CuffScale, CuffScale, ArmScale])
@@ -158,4 +207,8 @@ module UpperArmCoverKinetic() {
                center=true, convexity=3);
 }
 
-
+module UpperArmCuff() {
+    scale([CuffScale, CuffScale, ArmScale])
+        import("Upper Arm Cuff 100 1 Strap.STL",
+               center=true, convexity=3);
+}
