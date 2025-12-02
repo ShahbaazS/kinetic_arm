@@ -2,7 +2,7 @@
 // Above-elbow, 3D printable prosthetic arm
 
 // Preview Each Part
-part = "ForearmA"; // [ ForearmA:ForearmA, ForearmB:ForearmB, ForearmC:ForearmC, ForearmD:ForearmD,ForearmE:ForearmE, ForearmF:ForearmF, UpperArm:UpperArm, UpperArmCover:UpperArmCover, TypeAClosedForearm:TypeAClosedForearm, TypeAForearmStraps:TypeAForearmStraps, Palm:Palm, UpperArmCuff:UpperArmCuff, LatchSlider:LatchSlider, LatchTeeth:LatchTeeth, MiddleFingerEnd:MiddleFingerEnd, PinkyFingerPhalanx:PinkyFingerPhalanx, ThumbEnd:ThumbEnd, ThumbPhalanx:ThumbPhalanx, VentHoles21:VentHoles21]
+part = "ForearmA"; // [ ForearmA:ForearmA, ForearmB:ForearmB, ForearmC:ForearmC, ForearmD:ForearmD,ForearmE:ForearmE, ForearmF:ForearmF, UpperArm:UpperArm, UpperArmCover:UpperArmCover, TypeAClosedForearm:TypeAClosedForearm, TypeAForearmStraps:TypeAForearmStraps, Palm:Palm, UpperArmCuff:UpperArmCuff, KwawuArm1, KwawuArm2, Cuff, IndexFingerEnd, IndexFingerPhalanx, Latch, LatchHingeHole, LatchPin, LatchSlider:LatchSlider, LatchTeeth:LatchTeeth, MiddleFingerEnd:MiddleFingerEnd, PinkyFingerPhalanx:PinkyFingerPhalanx, ThumbEnd:ThumbEnd, ThumbPhalanx:ThumbPhalanx, VentHoles21:VentHoles21]
 
 // Choose Left or Right Hand
 LeftRight = "Left"; // [Left,Right]
@@ -236,7 +236,6 @@ module print_part( ) {
             LatchPin();
         }
     }
-}
 
     if (part == "LatchSlider") {
         if (LeftRight == "Left") {
