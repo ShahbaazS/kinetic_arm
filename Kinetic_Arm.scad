@@ -2,7 +2,7 @@
 // Above-elbow, 3D printable prosthetic arm
 
 // Preview Each Part
-part = "ForearmA"; // [ ForearmA:ForearmA, ForearmB:ForearmB, ForearmC:ForearmC, ForearmD:ForearmD,ForearmE:ForearmE, ForearmF:ForearmF, UpperArm:UpperArm, UpperArmCover:UpperArmCover, TypeAClosedForearm:TypeAClosedForearm, TypeAForearmStraps:TypeAForearmStraps, Palm:Palm, UpperArmCuff:UpperArmCuff, KwawuArm1, KwawuArm2, Cuff, IndexFingerEnd, IndexFingerPhalanx, Latch, LatchHingeHole, LatchPin, LatchSlider:LatchSlider, LatchTeeth:LatchTeeth, MiddleFingerEnd:MiddleFingerEnd, PinkyFingerPhalanx:PinkyFingerPhalanx, ThumbEnd:ThumbEnd, ThumbPhalanx:ThumbPhalanx, VentHoles21:VentHoles21]
+part = "ForearmA"; // [ ForearmA:ForearmA, ForearmB:ForearmB, ForearmC:ForearmC, ForearmD:ForearmD,ForearmE:ForearmE, ForearmF:ForearmF, OriginalCuff:OriginalCuff, UpperArmCover:UpperArmCover, TypeAClosedForearm:TypeAClosedForearm, TypeAForearm2Straps:TypeAForearm2Strap,Palm:Palm, Cuff1Strap:Cuff1Strap]
 
 // Choose Left or Right Hand
 LeftRight = "Left"; // [Left,Right]
@@ -28,7 +28,6 @@ Print_Rotation = [0, 0, 0];
 
 PI = 3.141592653589793238;
 
-// --- Data from Charts [Source: User Screenshots] ---
 // Base Elbow Widths at 100% Scale (Type A=98, B=102, etc.)
 BaseWidths = [98, 102, 107, 112, 117, 122];
 
@@ -132,7 +131,7 @@ module print_part( ) {
         }
     }   
    
-    if (part == "TypeAForearmStraps") {
+    if (part == "TypeAForearm2Straps") {
         if (LeftRight == "Left") {
             mirror([1,0,0]) TypeAForearmStraps();
         } else {
@@ -149,7 +148,7 @@ module print_part( ) {
     }
 
     // --- Kinetic Upper Arm ---
-    if (part == "UpperArm") {
+    if (part == "OriginalCuff") {
         if (LeftRight == "Left") {
             mirror([1,0,0]) UpperArmKinetic();
         } else {
@@ -165,140 +164,11 @@ module print_part( ) {
         }
     }
     }
-    if (part == "UpperArmCuff") {
+    if (part == "Cuff1Strap") {
         if (LeftRight == "Left") {
             mirror([1,0,0]) UpperArmCuff();
         } else {
             UpperArmCuff();
-        }
-    }
-    
-    if (part == "KwawuArm1") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) KwawuArm1();
-        } else {
-            KwawuArm1();
-        }
-    }
-    
-    if (part == "KwawuArm2") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) KwawuArm2();
-        } else {
-            KwawuArm2();
-        }
-    }
-    
-    if (part == "Cuff") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) Cuff();
-        } else {
-            Cuff();
-        }
-    }
-    
-    if (part == "IndexFingerEnd") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) IndexFingerEnd();
-        } else {
-            IndexFingerEnd();
-        }
-    }
-    
-    if (part == "IndexFingerPhalanx") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) IndexFingerPhalanx();
-        } else {
-            IndexFingerPhalanx();
-        }
-    }
-    
-    if (part == "Latch") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) Latch();
-        } else {
-            Latch();
-        }
-    }
-    
-    if (part == "LatchHingeHole") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) LatchHingeHole();
-        } else {
-            LatchHingeHole();
-        }
-    }
-    
-    if (part == "LatchPin") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) LatchPin();
-        } else {
-            LatchPin();
-        }
-    }
-
-    if (part == "LatchSlider") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) LatchSlider();
-        } else {
-            LatchSlider();
-        }
-    }
-    
-    if (part == "LatchTeeth") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) LatchTeeth();
-        } else {
-            LatchTeeth();
-        }
-    }
-
-    if (part == "MiddleFingerEnd") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) MiddleFingerEnd();
-        } else {
-            MiddleFingerEnd();
-        }
-    }
-    
-    if (part == "PinkyFingerPhalanx") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) PinkyFingerPhalanx();
-        } else {
-            PinkyFingerPhalanx();
-        }
-    }
-    
-    if (part == "ThumbEnd") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) ThumbEnd();
-        } else {
-            ThumbEnd();
-        }
-    }
-
-    if (part == "ThumbPhalanx") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) ThumbPhalanx();
-        } else {
-            ThumbPhalanx();
-        }
-    }
-    
-    if (part == "VentHoles21") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) VentHoles21();
-        } else {
-            VentHoles21();
-        }
-    }
-
-    
-    if (part == "LatchPin") {
-        if (LeftRight == "Left") {
-            mirror([1,0,0]) LatchPin();
-        } else {
-            LatchPin();
         }
     }
 }
@@ -383,96 +253,5 @@ module UpperArmCuff() {
 module UpperArmKinetic() {
     scale([UpperArmScale, UpperArmScale, LengthScale])
         import("Kinetic Arm STL Files/Upper Components/Scalable Components/Upper Arm/Upper Arm 100%.STL",
-               center=true, convexity=3);
-}
-
-module KwawuArm1() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_Arm1.STL",
-               center=true, convexity=3);
-}
-
-module KwawuArm2() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_Arm2.STL",
-               center=true, convexity=3);
-}
-
-module Cuff() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_Cuff.STL",
-               center=true, convexity=3);
-}
-
-module IndexFingerEnd() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_IndexFingerEnd.STL",
-               center=true, convexity=3);
-}
-
-module IndexFingerPhalanx() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_IndexFingerPhalanx.STL",
-               center=true, convexity=3);
-}
-
-module Latch() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_Latch.STL",
-               center=true, convexity=3);
-}
-
-module LatchSlicer() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_LatchSlider.stl",
-               center=true, convexity=3);
-}
-    
-module LatchTeeth() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_LatchTeeth.stl",
-               center=true, convexity=3);
-}
-    
-module MiddleFingerEnd() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_MiddleFingerEnd.stl",
-               center=true, convexity=3);
-}
-    
-module PinkyFingerPhalanx() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_PinkyFingerPhalanx.stl",
-               center=true, convexity=3);
-}
-    
-module ThumbEnd() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_ThumbEnd.stl",
-               center=true, convexity=3);
-}
-    
-module ThumbPhalanx() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_ThumbPhalanx.stl",
-               center=true, convexity=3);
-}
-    
-module VentHoles21() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_VentHoles21.stl",
-               center=true, convexity=3);
-}
-
-
-module LatchHingeHole() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_LatchHingeHole.STL",
-               center=true, convexity=3);
-}
-
-module LatchPin() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Kwawu Arm/o_LatchPin.STL",
                center=true, convexity=3);
 }
