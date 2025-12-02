@@ -2,7 +2,7 @@
 // Above-elbow, 3D printable prosthetic arm
 
 // Preview Each Part
-part = "ForearmA"; // [ ForearmA:ForearmA, ForearmB:ForearmB, ForearmC:ForearmC, ForearmD:ForearmD,ForearmE:ForearmE, ForearmF:ForearmF, UpperArm:UpperArm, UpperArmCover:UpperArmCover, TypeAClosedForearm:TypeAClosedForearm, TypeAForearmStraps:TypeAForearmStraps, Palm:Palm, UpperArmCuff:UpperArmCuff]
+part = "ForearmA"; // [ ForearmA:ForearmA, ForearmB:ForearmB, ForearmC:ForearmC, ForearmD:ForearmD,ForearmE:ForearmE, ForearmF:ForearmF, UpperArm:UpperArm, UpperArmCover:UpperArmCover, TypeAClosedForearm:TypeAClosedForearm, TypeAForearmStraps:TypeAForearmStraps, Palm:Palm, UpperArmCuff:UpperArmCuff, LatchSlider:LatchSlider, LatchTeeth:LatchTeeth, MiddleFingerEnd:MiddleFingerEnd, PinkyFingerPhalanx:PinkyFingerPhalanx, ThumbEnd:ThumbEnd, ThumbPhalanx:ThumbPhalanx, VentHoles21:VentHoles21]
 
 // Choose Left or Right Hand
 LeftRight = "Left"; // [Left,Right]
@@ -172,6 +172,62 @@ module print_part( ) {
             UpperArmCuff();
         }
     }
+    
+    if (part == "LatchSlider") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) LatchSlider();
+        } else {
+            LatchSlider();
+        }
+    }
+    
+    if (part == "LatchTeeth") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) LatchTeeth();
+        } else {
+            LatchTeeth();
+        }
+    }
+
+    if (part == "MiddleFingerEnd") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) MiddleFingerEnd();
+        } else {
+            MiddleFingerEnd();
+        }
+    }
+    
+    if (part == "PinkyFingerPhalanx") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) PinkyFingerPhalanx();
+        } else {
+            PinkyFingerPhalanx();
+        }
+    }
+    
+    if (part == "ThumbEnd") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) ThumbEnd();
+        } else {
+            ThumbEnd();
+        }
+    }
+
+    if (part == "ThumbPhalanx") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) ThumbPhalanx();
+        } else {
+            ThumbPhalanx();
+        }
+    }
+    
+    if (part == "VentHoles21") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) VentHoles21();
+        } else {
+            VentHoles21();
+        }
+    }
 }
 
 
@@ -251,3 +307,44 @@ module UpperArmCuff() {
                center=true, convexity=3);
 }
 
+module LatchSlicer() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_LatchSlider.stl",
+               center=true, convexity=3);
+}
+    
+module LatchTeeth() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_LatchTeeth.stl",
+               center=true, convexity=3);
+}
+    
+module MiddleFingerEnd() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_MiddleFingerEnd.stl",
+               center=true, convexity=3);
+}
+    
+module PinkyFingerPhalanx() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_PinkyFingerPhalanx.stl",
+               center=true, convexity=3);
+}
+    
+module ThumbEnd() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_ThumbEnd.stl",
+               center=true, convexity=3);
+}
+    
+module ThumbPhalanx() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_ThumbPhalanx.stl",
+               center=true, convexity=3);
+}
+    
+module VentHoles21() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_VentHoles21.stl",
+               center=true, convexity=3);
+}
