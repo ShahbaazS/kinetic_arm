@@ -2,7 +2,7 @@
 // Above-elbow, 3D printable prosthetic arm
 
 // Preview Each Part
-part = "ForearmA"; // [ ForearmA:ForearmA, ForearmB:ForearmB, ForearmC:ForearmC, ForearmD:ForearmD,ForearmE:ForearmE, ForearmF:ForearmF, UpperArm:UpperArm, UpperArmCover:UpperArmCover, TypeAClosedForearm:TypeAClosedForearm, TypeAForearmStraps:TypeAForearmStraps, Palm:Palm, UpperArmCuff:UpperArmCuff]
+part = "ForearmA"; // [ ForearmA:ForearmA, ForearmB:ForearmB, ForearmC:ForearmC, ForearmD:ForearmD,ForearmE:ForearmE, ForearmF:ForearmF, UpperArm:UpperArm, UpperArmCover:UpperArmCover, TypeAClosedForearm:TypeAClosedForearm, TypeAForearmStraps:TypeAForearmStraps, Palm:Palm, UpperArmCuff:UpperArmCuff, KwawuArm1, KwawuArm2, Cuff, IndexFingerEnd, IndexFingerPhalanx, Latch, LatchHingeHole, LatchPin]
 
 // Choose Left or Right Hand
 LeftRight = "Left"; // [Left,Right]
@@ -172,6 +172,70 @@ module print_part( ) {
             UpperArmCuff();
         }
     }
+    
+    if (part == "KwawuArm1") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) KwawuArm1();
+        } else {
+            KwawuArm1();
+        }
+    }
+    
+    if (part == "KwawuArm2") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) KwawuArm2();
+        } else {
+            KwawuArm2();
+        }
+    }
+    
+    if (part == "Cuff") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) Cuff();
+        } else {
+            Cuff();
+        }
+    }
+    
+    if (part == "IndexFingerEnd") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) IndexFingerEnd();
+        } else {
+            IndexFingerEnd();
+        }
+    }
+    
+    if (part == "IndexFingerPhalanx") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) IndexFingerPhalanx();
+        } else {
+            IndexFingerPhalanx();
+        }
+    }
+    
+    if (part == "Latch") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) Latch();
+        } else {
+            Latch();
+        }
+    }
+    
+    if (part == "LatchHingeHole") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) LatchHingeHole();
+        } else {
+            LatchHingeHole();
+        }
+    }
+    
+    if (part == "LatchPin") {
+        if (LeftRight == "Left") {
+            mirror([1,0,0]) LatchPin();
+        } else {
+            LatchPin();
+        }
+    }
 }
 
 
@@ -251,3 +315,56 @@ module UpperArmCuff() {
                center=true, convexity=3);
 }
 
+module UpperArmKinetic() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Upper Components/Scalable Components/Upper Arm/Upper Arm 100%.STL",
+               center=true, convexity=3);
+}
+
+module KwawuArm1() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_Arm1.STL",
+               center=true, convexity=3);
+}
+
+module KwawuArm2() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_Arm2.STL",
+               center=true, convexity=3);
+}
+
+module Cuff() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_Cuff.STL",
+               center=true, convexity=3);
+}
+
+module IndexFingerEnd() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_IndexFingerEnd.STL",
+               center=true, convexity=3);
+}
+
+module IndexFingerPhalanx() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_IndexFingerPhalanx.STL",
+               center=true, convexity=3);
+}
+
+module Latch() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_Latch.STL",
+               center=true, convexity=3);
+}
+
+module LatchHingeHole() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_LatchHingeHole.STL",
+               center=true, convexity=3);
+}
+
+module LatchPin() {
+    scale([UpperArmScale, UpperArmScale, LengthScale])
+        import("Kinetic Arm STL Files/Kwawu Arm/o_LatchPin.STL",
+               center=true, convexity=3);
+}
