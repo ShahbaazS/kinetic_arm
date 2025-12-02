@@ -20,15 +20,6 @@ ForearmType = "Type A"; // [Type A, Type B, Type C, Type D, Type E, Type F]
 // If FALSE, uses exact mathematical scale (e.g., 93.4%) for a better fit.
 SnapToChartIncrements = false;
 
-// Circumference of Forearm just below elbow crease (mm)
-ForearmCircumference = 271; //[135: 542]
-// Automatically calculate Bicep size based on Forearm size to maintain original proportions?
-LockBicepToForearmRatio = true;
-// Otherwise: Circumference of Bicep (mm)
-BicepCircumference = 294; //[147: 588]
-// Padding Thickness -inside forearm and cuff (mm)
-PaddingThickness = 2; //[0: 10]
-
 // --- 3D Printing Orientation ---
 // Rotate the part to lay flat on the bed (X, Y, Z in degrees)
 Print_Rotation = [0, 0, 0];
@@ -62,8 +53,6 @@ idx = get_index(ForearmType);
 // These are the "100%" reference values the original arm was designed for.
 // If the Kinetic arm uses different base sizes, replace 282 / 271 / 294 with those.
 BaseArmLength             = 282;  // mm
-BaseForearmCircumference  = 271;  // mm
-BaseBicepCircumference    = 294;  // mm
 RawWidthScale = PatientElbowWidth / BaseWidths[idx];
 
 // Rounds to nearest 0.025 (2.5%)
@@ -79,19 +68,6 @@ SafeInsertIndex = max(0, min(16, InsertIndex));
 
 // Scale along the arm (wrist → elbow)
 ArmScale = ArmLength / BaseArmLength;
-
-// Scale around the forearm (X/Y) including padding
-ForearmCircumferenceWPadding = ((ForearmCircumference/PI) + 2*PaddingThickness) * PI;
-ArmCircumferenceScale        = ForearmCircumferenceWPadding / BaseForearmCircumference;
-
-// Scale around the upper arm (for the upper arm pieces)
-
-CalculatedBicep = LockBicepToForearmRatio 
-    ? ForearmCircumference * (BaseBicepCircumference / BaseForearmCircumference) 
-    : BicepCircumference;
-    
-BicepCircumferenceWPadding = ((CalculatedBicep/PI) + 2*PaddingThickness) * PI;
-CuffScale                  = BicepCircumferenceWPadding / BaseBicepCircumference;
 
 print_part();
 
@@ -274,3 +250,4 @@ module UpperArmCuff() {
         import("Upper Arm Cuff 100 1 Strap.STL",
                center=true, convexity=3);
 }
+
