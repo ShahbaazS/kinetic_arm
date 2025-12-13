@@ -13,15 +13,12 @@ PatientElbowWidth = 98;
 ArmLength = 282; 
 
 // --- Configuration ---
-// Match the specific Type you are printing (A-F) to get correct base ratios
-ForearmType = "Type A"; // [Type A, Type B, Type C, Type D, Type E, Type F]
 
-// If TRUE, rounds scale to nearest 2.5% to match the PDF charts exactly.
-// If FALSE, uses exact mathematical scale (e.g., 93.4%) for a better fit.
-SnapToChartIncrements = false;
+// If Checkmark, rounds scale to nearest 2.5% exactly. If no checkmark, uses exact values (e.g., 93.4%) for better fit.
+UseKineticArmOriginalSizes = true;
 
 // --- 3D Printing Orientation ---
-// Rotate the part to lay flat on the bed (X, Y, Z in degrees)
+// Rotate the part to lay flat on bed (X, Y, Z in degrees) (e.g. 90 or 180)
 Print_Rotation = [0, 0, 0];
 
 /* [Hidden] */
@@ -39,15 +36,14 @@ UpperArmRatios = [0.95, 1.00, 1.05, 1.10, 1.15, 1.20];
 InsertLabels = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q"];
 
 // --- Helper Functions ---
-function get_index(type) = 
-    (type=="Type A") ? 0 : 
-    (type=="Type B") ? 1 : 
-    (type=="Type C") ? 2 : 
-    (type=="Type D") ? 3 : 
-    (type=="Type E") ? 4 : 
-    (type=="Type F") ? 5 : 0;
 
-idx = get_index(ForearmType);
+idx = 
+    (PatientElbowWidth < 100)   ? 0 : // < 100 -> Type A (98)
+    (PatientElbowWidth < 104.5) ? 1 : // 100-104.5 -> Type B (102)
+    (PatientElbowWidth < 109.5) ? 2 : // 104.5-109.5 -> Type C (107)
+    (PatientElbowWidth < 114.5) ? 3 : // 109.5-114.5 -> Type D (112)
+    (PatientElbowWidth < 119.5) ? 4 : // 114.5-119.5 -> Type E (117)
+    5;                                // > 119.5 -> Type F (122)
 
 // These are the "100%" reference values the original arm was designed for.
 // If the Kinetic arm uses different base sizes, replace 282 / 271 / 294 with those.
@@ -55,7 +51,7 @@ BaseArmLength             = 282;  // mm
 RawWidthScale = PatientElbowWidth / BaseWidths[idx];
 
 // Rounds to nearest 0.025 (2.5%)
-FinalWidthScale = SnapToChartIncrements 
+FinalWidthScale = UseKineticArmOriginalSizes 
     ? round(RawWidthScale / 0.025) * 0.025 
     : RawWidthScale;
     
@@ -213,13 +209,13 @@ module ForearmF() {
 
 module TypeAClosedForearm() {
     scale([FinalWidthScale, FinalWidthScale, FinalWidthScale])
-        import("Type A Closed Forearm 100.STL",
+        import("Kinetic Arm STL Files/Type A Closed Forearm 100.STL",
                center=true, convexity=3);
 }
 
 module TypeAForearmStraps() {
     scale([FinalWidthScale, FinalWidthScale, FinalWidthScale])
-        import("Type A Forearm 100_ 2 Straps v6.STL",
+        import("Kinetic Arm STL Files/Type A Forearm 100_ 2 Straps v6.STL",
                center=true, convexity=3);
 }
 
@@ -242,16 +238,8 @@ module UpperArmCoverKinetic() {
                center=true, convexity=3);
 }
 
-
-
 module UpperArmCuff() {
     scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Upper Arm Cuff 100 1 Strap.STL",
-               center=true, convexity=3);
-}
-
-module UpperArmKinetic() {
-    scale([UpperArmScale, UpperArmScale, LengthScale])
-        import("Kinetic Arm STL Files/Upper Components/Scalable Components/Upper Arm/Upper Arm 100%.STL",
+        import("Kinetic Arm STL Files/Upper Arm Cuff 100 1 Strap.STL",
                center=true, convexity=3);
 }
